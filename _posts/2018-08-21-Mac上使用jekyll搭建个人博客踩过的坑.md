@@ -1,20 +1,18 @@
 ---
 layout: post
-title: "HEXO搭建个人博客"
-date: 2015-08-25 
-description: "HEXO配置，HEXO+Github，搭建自己的博客"
+title: "Mac上使用jekyll搭建个人博客踩过的坑"
+date: 2019-08-21 
+description: "Mac环境+Jekyll，搭建自己的博客"
 tag: 博客 
 ---   
 
-　　经过各种找资料，踩过各种坑，终于使用 hexo 搭建个人博客初步完成了，域名目前用得时 github 的，我的 hexo 是 3.1.1 版本，hexo 不同的版本，很多配置都不一样。好吧，废话不多说了，开始吧。     
+　　自从上次在github上闲逛发现了潘柏信大佬的基于jekyll搭建一个个人博客的教程之后之后一直念念不忘,之前也一直想搭建一个博客，可是一直没想好怎么搭建,这次无意间的发现促使我向生活下手了。     
 
-　　本篇文章累计了大量评论，和我的一些解答，读者有什么问题可以先看看评论，或者搜下关键字，如果还是有问题可以给我在评论里给我留言，问题很着急的可以加我 ＱＱ：1499065178　，或者给我发邮件：[leopardpan@icloud.com](mailto:leopardpan@icloud.com)  ，都可以，如果你已经搭建完成了，可以看看我的另一篇博客[HEXO进阶](http://baixin.io/2016/06/HEXO_Advanced/)，有讲如何能百度搜索你的博客、多台电脑使用HEXO发布博客等。我现在的博客是使用 Jekyll 搭建的，如果你想使用我现在的模板请看[Jekyll搭建个人博客](http://baixin.io/2016/10/jekyll_tutorials1/) 
+　　本篇文章基于潘柏信的博客源码进行搭建，里面会附上我踩过的一些坑的经验，读者有什么问题可以在git上搜下关键字'leopardpan'，如果还是有问题可以给我在评论里给我留言，问题很着急的可以加我 ＱＱ：905229788　，如果你想使用我现在的模板请看[Jekyll搭建个人博客](http://baixin.io/2016/10/jekyll_tutorials1/) 
  
 
 ## 正文：
-　这边教程是针对与Mac的，[参考链接](http://ibruce.info/2013/11/22/hexo-your-blog/?utm_source=tuicool)，由于原文讲到的hexo是以前的老版本，所以现在的版本配置的时候会有些改动。
-
-　之前是想着写博客，一方面是给自己做笔记，可以提升自己的写作、总结能力，一个技术点我们会使用，并不难，但是要做到让让别人也能听懂我们讲得，还是需要一定的技巧和经验的。很多类似于CSDN、博客园也都可以写文章，但是页面的样式我，不是太喜欢，简书还算好点得。最近看到一些大神们的博客（在我的友情链接里有），貌似都是用hexo写得，我也依葫芦画瓢的搭建了一个。不罗嗦了，直接上搭建步骤。
+　这边教程是针对与Mac基于jekyll搭建博客踩过的一些坑，之后可能会有些改动。
  
 ## 配置环境     
 
@@ -24,8 +22,8 @@ tag: 博客
 到Node.js[官网](https://nodejs.org/)下载相应平台的最新版本，一路安装即可。
 
 ### 安装Git（必须）     
-作用：把本地的hexo内容提交到github上去.
-安装Xcode就自带有Git，我就不多说了。
+作用：把本地的内容提交到github上去.
+安装Idea就自带有Git，我就不多说了。
 
 ### 申请GitHub（必须）
 作用：是用来做博客的远程创库、域名、服务器之类的，怎么与本地hexo建立连接等下讲。
@@ -106,65 +104,34 @@ ERROR Plugin load failed: hexo-server
 再点击网址[http://0.0.0.0:4000](http://0.0.0.0:4000) OK终于可以看到属于你自己的blog啦，?，虽然很简陋，但好歹有了一个属于自己的小窝了。[参考链接](https://disqus.com/home/discussion/bsspirit/hexogithubweb/)，本地已经简单的设置好了，但是现在域名和服务器都是基于自己的电脑，接下来需要跟github进行关联。
 
 
-## 配置Github          
-   
-### 建立Repository     
-
-建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法
-然后建立关联，我的Blog在本地/Users/leopard/Blog，Blog是我之前建的东西也全在这里面，有：
-
-> Blog        
-> 　｜        
-> 　｜－－ _config.yml       
-> 　｜－－ node_modules      
-> 　｜－－ public                
-> 　｜－－ source                                                  
-> 　｜－－ db.json	          
-> 　｜－－ package.json          
-> 　｜－－ scaffolds          
-> 　｜－－ themes          　　　　　
-　　　
-
-现在我们需要_config.yml文件，来建立关联，命令：
-
-	vim _config.yml
-
-翻到最下面，改成我这样子的，注意： `: 后面要有空格`
-
-	deploy:
-	  type: git
-	  repository: https://github.com/leopardpan/leopardpan.github.io.git
-	  branch: master
-
-执行如下命令才能使用git部署
-
-	npm install hexo-deployer-git --save
-
-网上会有很多说法，有的type是github, 还有repository 最后面的后缀也不一样，是github.com.git，我也踩了很多坑，我现在的版本是hexo: 3.1.1，执行命令hexo -vsersion就出来了,貌似3.0后全部改成我上面这种格式了。
-忘了说了，我没用SSH Keys如果你用了SSH Keys的话直接在github里复制SSH的就行了，总共就两种协议，相信你懂的。
-然后，执行配置命令：
-
-	hexo deploy
-
-　然后再浏览器中输入[http://leopardpan.github.io/](http://leopardpan.github.io/)就行了，我的 github 的账户叫 leopardpan ,把这个改成你 github 的账户名就行了
-
 ### 部署步骤
 
 每次部署的步骤，可按以下三步来进行。
  
-	hexo clean
-	hexo generate
-	hexo deploy
+	
+	jekyll build --watch
 
 一些常用命令：
 
-	hexo new "postName" #新建文章
-	hexo new page "pageName" #新建页面
-	hexo generate #生成静态页面至public目录
-	hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
-	hexo deploy #将.deploy目录部署到GitHub
-	hexo help  #查看帮助
-	hexo version  #查看Hexo的版本
+	$ jekyll build
+    # =>当前文件夹中的内容将会生成到./site文件夹中。
+    # jekyll build --destination <destination>
+    # =>当前文件夹中的内容将会生成到目标文件夹<destination>中。
+    $ jekyll build --source <source> --destination <destination>
+    # =>指定源文件夹<source>中的内容将会生成到目标文件夹<destination>中。
+    $ jekyll build --watch
+    # =>当前文件夹中的内容将会生成到./site文件夹中，
+    # 查看改变，并且自动再生成。
+    
+    Jekyll同时也集成了一个开发用的服务器，可以让你使用浏览器在本地进行预览。
+    jekyll serve
+    # =>一个开发服务器将会运行在http://localhost:4000/
+    $ jekyll serve --detach
+    # =>功能和`jekyll serve`命令相同，但是会脱离终端在后台运行。
+    #   如果你想关闭服务器，可以使用`kill -9 1234`命令，“1234”是进程号(PID)。
+    #   如果你找不到进程号，那么就用`ps -aux | gerp jekyll`[更多](http://unixhelp.ed.ac.uk/shell/jobz5.html)命令来查看，然后关闭服务器。
+    $ jekyll serve --watch
+    # =>和`jekyll`相同，但是会查看变更并且自动再生成。
 
 这里有大量的[主题列表](https://github.com/hexojs/hexo/wiki/Themes)使用方法里面
 都有详细的介绍，我就不多说了。      
@@ -196,4 +163,4 @@ Markdown语法参考链接: [作业部落](https://www.zybuluo.com/mdeditor)
 
 <p> </p>
 
-转载请注明原地址，潘柏信的博客：[http://leopardpan.github.io](http://leopardpan.github.io) 谢谢！
+转载自潘柏信的博客：[http://leopardpan.github.io](http://leopardpan.github.io) 谢谢！
