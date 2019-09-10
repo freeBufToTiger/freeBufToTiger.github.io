@@ -135,6 +135,7 @@ tags: spring boot
             SpringApplication.run(RestfulApiWebDemo.class, args);
         }
     }
+    
 ### <a name="run-spring-boot-main"></a>十、运行srping boot的运行入口类RestfulApiWebDemo
    可以通过run直接运行，也可以通过 
     `mvn spring-boot:run`<br>
